@@ -1,4 +1,4 @@
-FROM debian:12
+FROM debian:13
 
 RUN apt-get update && apt-get install -y \
         procps \
@@ -6,10 +6,11 @@ RUN apt-get update && apt-get install -y \
         iputils-ping \
         dnsutils \
         rsyslog \
+        tcpdump\
         kea-dhcp4-server \
         && rm -rf /var/lib/apt/lists/*
 
-COPY kea-dhcp4.conf /etc/kea/kea-dhcp4.conf
+COPY kea-dhcp4.conf.json /etc/kea/kea-dhcp4.conf
 
 RUN mkdir -p /run/kea /var/run/kea /var/lib/kea && \
     touch /var/lib/kea/kea-leases4.csv && \

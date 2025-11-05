@@ -1,4 +1,4 @@
-FROM debian:12
+FROM debian:13
 
 RUN apt update  && apt install -y \
     procps \
@@ -6,6 +6,7 @@ RUN apt update  && apt install -y \
     iputils-ping \
     bind9utils \
     dnsutils \
+    tcpdump\
     isc-dhcp-client \
     && rm -rf /var/lib/apt/lists/*
 
