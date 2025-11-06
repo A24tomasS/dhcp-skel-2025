@@ -1,0 +1,7 @@
+//
+// Do any local configuration here
+//
+zone "starwars.lan" {
+    type master;
+    file "zonas/db.stark.lan";
+};

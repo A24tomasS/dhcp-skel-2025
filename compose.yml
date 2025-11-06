@@ -1,20 +1,39 @@
 services:
-  kea:
+#===================DHCP==========================
+  ned:
     build: ./kea
-    container_name: kea
+    hostname: ned
     networks:
-      dhcp_lab:
-        ipv4_address: 192.168.130.2
+      stark_lan:
+        ipv4_address: 192.168.10.100
     cap_add:
       - NET_ADMIN
     volumes:
-      - ./kea/kea-dhcp4.conf.json:/etc/kea/kea-dhcp4.conf
-  cliente1:
-    build: ./cliente
-    container_name: client1
+      - ./ned/kea-dhcp4.conf.json:/etc/kea/kea-dhcp4.conf
+      - ./ned/keaCons:/var/lib/kea
+      - ./ned/keaLogs:/var/log/kea
+#===================DHCP==========================
+#===================DNS==========================
+  arya:
+    build: ./arya
+    hostname: arya
+    container_name: arya
     networks:
-      dhcp_lab:
-        ipv4_address: 192.168.130.3
+      stark_lan:
+        ipv4_address: 192.168.10.9
+        mac_address: 02:42:ac:11:00:ff  # dirección HW fija
+    volumes:
+      - ./arya/conf/named.conf.options:/etc/bind/named.conf.options
+      - ./arya/conf/named.conf.local:/etc/bind/named.conf.local
+      - ./arya/conf/zonas:/var/cache/bind/zonas
+#===================DNS==========================
+#===================Stark.lan==========================
+  bran:
+    build: ./cliente
+    container_name: bran
+    networks:
+      stark_lan:
+        ipv4_address: 192.168.10.3
         mac_address: 02:42:ac:11:00:10  # dirección HW fija
     cap_add:
       - NET_ADMIN
@@ -23,18 +42,75 @@ services:
 
   cliente2:
     build: ./cliente
-
     networks:
-      dhcp_lab:
-        ipv4_address: 192.168.130.4
+      stark_lan:
+        ipv4_address: 192.168.10.4
+    cap_add:
+      - NET_ADMIN
+    command: >
+      sh -c "dhclient -v eth0 && sleep infinity"
+#===================Stark.lan==========================
+#===================lannister.lan==========================
+  cliente3:
+    build: ./cliente
+    networks:
+      stark_lan:
+        ipv4_address: 192.168.10.5
+        mac_address: 02:42:ac:11:00:11  # dirección HW fija
     cap_add:
       - NET_ADMIN
     command: >
       sh -c "dhclient -v eth0 && sleep infinity"
 
+  cliente4:
+    build: ./cliente
+    networks:
+      stark_lan:
+        ipv4_address: 192.168.10.6
+    cap_add:
+      - NET_ADMIN
+    command: >
+      sh -c "dhclient -v eth0 && sleep infinity"
+#===================lannister.lan==========================
+#===================vboxnet1==========================
+  cliente5:
+    build: ./cliente
+    networks:
+      stark_lan:
+        ipv4_address: 192.168.10.7
+        mac_address: 02:42:ac:11:00:12  # dirección HW fija
+    cap_add:
+      - NET_ADMIN
+    command: >
+      sh -c "dhclient -v eth0 && sleep infinity"
+
+  cliente6:
+    build: ./cliente
+    networks:
+      stark_lan:
+        ipv4_address: 192.168.10.8
+    cap_add:
+      - NET_ADMIN
+    command: >
+      sh -c "dhclient -v eth0 && sleep infinity"
+#===================vboxnet1==========================
+#===================Redes==========================
 networks:
-  dhcp_lab:
+  stark_lan:
     driver: bridge
     ipam:
       config:
-        - subnet: 192.168.130.0/24
+        - subnet: 192.168.10.0/24
+
+  # lannister_lan:
+  # driver: bridge
+  # ipam:
+  #   config:
+  #     - subnet: 192.168.11.0/24
+
+  # vboxnet1:
+  #   driver: bridge
+  #   ipam:
+  #     config:
+  #       - subnet: 192.168.57.0/24
+#===================Redes==========================
