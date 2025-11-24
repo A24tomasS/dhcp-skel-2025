@@ -10,89 +10,107 @@ services:
       - NET_ADMIN
     volumes:
       - ./ned/kea-dhcp4.conf.json:/etc/kea/kea-dhcp4.conf
-      - ./ned/keaCons:/var/lib/kea
+      - ./ned/dhcp-ddns.conf.json:/etc/kea/ddns-dhcp.conf
+      #- ./ned/keaCons:/var/lib/kea
       - ./ned/keaLogs:/var/log/kea
 #===================DHCP==========================
 #===================DNS==========================
   arya:
-    build: ./arya
+    build: ./bind9
     hostname: arya
-    container_name: arya
     networks:
       stark_lan:
-        ipv4_address: 192.168.10.9
-        mac_address: 02:42:ac:11:00:ff  # dirección HW fija
+        ipv4_address: 192.168.10.99
+    cap_add:
+      - NET_ADMIN    
     volumes:
-      - ./arya/conf/named.conf.options:/etc/bind/named.conf.options
-      - ./arya/conf/named.conf.local:/etc/bind/named.conf.local
-      - ./arya/conf/zonas:/var/cache/bind/zonas
+      - ./arya/named.conf.local:/etc/bind/named.conf.local
+      - ./arya/named.conf.options:/etc/bind/named.conf.options
+      - ./arya/zonas:/var/cache/bind/zonas
 #===================DNS==========================
+#===================Router==========================
+  router:
+    build: ./router
+    hostname: router
+    networks:
+      stark_lan:
+        ipv4_address: 192.168.10.254
+        interface_name: eth1
+      lannister_lan:
+        ipv4_address: 192.168.11.254
+        interface_name: eth2
+      targaryen_lan:
+        ipv4_address: 192.168.12.254
+        interface_name: eth3
+      nat:
+        ipv4_address: 192.0.100.254
+        interface_name: eth0
+    cap_add:
+      - NET_ADMIN
+#===================Router==========================
 #===================Stark.lan==========================
   bran:
     build: ./cliente
-    container_name: bran
+    hostname: bran
     networks:
       stark_lan:
-        ipv4_address: 192.168.10.3
         mac_address: 02:42:ac:11:00:10  # dirección HW fija
     cap_add:
       - NET_ADMIN
     command: >
-      sh -c "dhclient -v eth0 && sleep infinity"
+      sh -c "sleep 5 && ip addr flush dev eth0 && dhclient -v eth0 && sleep infinity"
 
   cliente2:
     build: ./cliente
     networks:
       stark_lan:
-        ipv4_address: 192.168.10.4
+        mac_address: 02:42:ac:11:00:11  # dirección HW fija
     cap_add:
       - NET_ADMIN
     command: >
-      sh -c "dhclient -v eth0 && sleep infinity"
+      sh -c "sleep 5 && ip addr flush dev eth0 && dhclient -v eth0 && sleep infinity"
 #===================Stark.lan==========================
 #===================lannister.lan==========================
   cliente3:
     build: ./cliente
     networks:
       stark_lan:
-        ipv4_address: 192.168.10.5
-        mac_address: 02:42:ac:11:00:11  # dirección HW fija
+        mac_address: 02:42:ac:11:00:12  # dirección HW fija
     cap_add:
       - NET_ADMIN
     command: >
-      sh -c "dhclient -v eth0 && sleep infinity"
+      sh -c "sleep 5 && ip addr flush dev eth0 && dhclient -v eth0 && sleep infinity"
 
   cliente4:
     build: ./cliente
     networks:
       stark_lan:
-        ipv4_address: 192.168.10.6
+        mac_address: 02:42:ac:11:00:13  # dirección HW fija
     cap_add:
       - NET_ADMIN
     command: >
-      sh -c "dhclient -v eth0 && sleep infinity"
+      sh -c "sleep 5 && ip addr flush dev eth0 && dhclient -v eth0 && sleep infinity"
 #===================lannister.lan==========================
 #===================vboxnet1==========================
   cliente5:
     build: ./cliente
     networks:
       stark_lan:
-        ipv4_address: 192.168.10.7
-        mac_address: 02:42:ac:11:00:12  # dirección HW fija
+        mac_address: 02:42:ac:11:00:14  # dirección HW fija
     cap_add:
       - NET_ADMIN
     command: >
-      sh -c "dhclient -v eth0 && sleep infinity"
+      sh -c "sleep 5 && ip addr flush dev eth0 && dhclient -v eth0 && sleep infinity"
 
   cliente6:
     build: ./cliente
     networks:
       stark_lan:
-        ipv4_address: 192.168.10.8
+        mac_address: 02:42:ac:11:00:15  # dirección HW fija
     cap_add:
       - NET_ADMIN
     command: >
-      sh -c "dhclient -v eth0 && sleep infinity"
+      sh -c "sleep 5 && ip addr flush dev eth0 && dhclient -v eth0 && sleep infinity"
 #===================vboxnet1==========================
 #===================Redes==========================
 networks:
@@ -102,15 +120,21 @@ networks:
       config:
         - subnet: 192.168.10.0/24
 
-  # lannister_lan:
-  # driver: bridge
-  # ipam:
-  #   config:
-  #     - subnet: 192.168.11.0/24
+  lannister_lan:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.11.0/24
 
-  # vboxnet1:
-  #   driver: bridge
-  #   ipam:
-  #     config:
-  #       - subnet: 192.168.57.0/24
+  targaryen_lan:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.12.0/24
+
+  nat:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.0.100.0/24
 #===================Redes==========================

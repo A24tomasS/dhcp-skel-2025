@@ -1,84 +1,139 @@
 {
-  "Dhcp4": {
-      "loggers": [
-        {
-          "name": "kea-dhcp4",
-          "output_options": [{"output": "/var/log/kea/logs.log"}],
-          "severity": "DEBUG"
-        }
-    ],
+	"Dhcp4": {
+		"dhcp-ddns": {
+			"enable-updates": true,
+			"server-ip": "127.0.0.1",
+			"server-port": 53001,
+			"sender-ip": "",
+			"sender-port": 0,
+			"max-queue-size": 1024,
+			"ncr-protocol": "UDP",
+			"ncr-format": "JSON"
+		},
 
-    "interfaces-config": {
-      "interfaces": [ "eth0" ]
-    },
+		"loggers": [
+			{
+				"name": "kea-dhcp4",
+				"output_options": [{ "output": "/var/log/kea/logs.log" }],
+				"severity": "DEBUG"
+			}
+		],
 
-    "lease-database": {
-        "type": "memfile",
-        "persist": true,
-        "name": "/var/lib/kea/lista-concesiones.csv",
-        "lfc-interval": 300,
-        "max-row-errors": 100
-    },
+		"interfaces-config": {
+			"interfaces": ["eth0"]
+		},
 
-    "valid-lifetime": 600,
-    "renew-timer": 300,
-    "rebind-timer": 500,
-    "authoritative": true,
+		"lease-database": {
+			"type": "memfile",
+			"persist": true,
+			"name": "/var/lib/kea/lista-concesiones.csv",
+			"lfc-interval": 300,
+			"max-row-errors": 100
+		},
 
-    "subnet4": [
-      {
-        "id": 1,
-        "interface": "eth0",
-        "subnet": "192.168.10.0/24",
-        "pools": [{ "pool": "192.168.10.30-192.168.10.32" },
-                  { "pool": "192.168.10.101-192.168.10.230" }],
-        "option-data":[
-          {
-            "name": "domain-name-servers",
-            "space": "dhcp4",
-            "data": "192.168.10.30"
-          }
-        ],
-        "reservations": [
-          {
-            "hw-address": "02:42:ac:11:00:ff",
-            "ip-address": "192.168.10.30"
-          },
-          
-          {
-            "hw-address": "02:42:ac:11:00:10",
-            "ip-address": "192.168.10.31"
-          }
-        ]
-      },
+		"valid-lifetime": 600,
+		"renew-timer": 300,
+		"rebind-timer": 500,
+		"authoritative": true,
+		"option-data": [
+			{
+				"name": "time-servers",
+				"space": "dhcp4",
+				"data": "150.214.94.10,150.214.94.5"
+			},
+			{
+				"name": "domain-name-servers",
+				"space": "dhcp4",
+				"data": "192.168.10.99"
+			}
+		],
+		"subnet4": [
+			{
+				"id": 1,
+				"interface": "eth0",
+				"subnet": "192.168.10.0/24",
+				"ddns-qualifying-suffix": "stark.lan",
+				"pools": [
+					{
+						"pool": "192.168.10.30-192.168.10.32",
+						"option-data": [
+							{
+								"name": "routers",
+								"space": "dhcp4",
+								"data": "192.168.10.253"
+							}
+						]
+					},
+					{
+						"pool": "192.168.10.101-192.168.10.230"
+					}
+				],
+				"option-data": [
+					{
+						"name": "routers",
+						"space": "dhcp4",
+						"data": "192.168.10.254"
+					},
+					{
+						"name": "domain-name",
+						"space": "dhcp4",
+						"data": "stark.lan"
+					}
+				],
+				"reservations": [
+					{
+						"hw-address": "02:42:ac:11:00:10",
+						"ip-address": "192.168.10.31",
+						"option-data": [
+							{
+								"name": "routers",
+								"space": "dhcp4",
+								"data": "192.168.10.252"
+							}
+						]
+					}
+				]
+			},
 
-      {
-        "id": 2,
-        "interface": "eth0",
-        "subnet": "192.168.11.0/24",
-        "pools": [{ "pool": "192.168.11.0-192.168.11.254" }],
-        "option-data":[
-          {
-            "name": "domain-name-servers",
-            "space": "dhcp4",
-            "data": "192.168.10.30"
-          }
-        ]
-      },
+			{
+				"id": 2,
+				"interface": "eth0",
+				"subnet": "192.168.11.0/24",
+				"pools": [{ "pool": "192.168.11.0-192.168.11.254" }],
+				"ddns-qualifying-suffix": "lannister.lan",
+				"option-data": [
+					{
+						"name": "domain-name-servers",
+						"space": "dhcp4",
+						"data": "192.168.10.99"
+					},
+					{
+						"name": "domain-name",
+						"space": "dhcp4",
+						"data": "lennister.lan"
+					}
+				]
+			},
 
-      {
-        "id": 3,
-        "interface": "eth0",
-        "subnet": "192.168.57.0/24",
-        "pools": [{ "pool": "192.168.57.0-192.168.57.254" }],
-        "option-data":[
-          {
-            "name": "domain-name-servers",
-            "space": "dhcp4",
-            "data": "192.168.10.30"
-          }
-        ]
-      }
-    ]
-  }
+			{
+				"id": 3,
+				"interface": "eth0",
+				"subnet": "192.168.57.0/24",
+				"pools": [{ "pool": "192.168.57.0-192.168.57.254" }],
+				"ddns-qualifying-suffix": "targaryen.lan",
+				"option-data": [
+					{
+						"name": "domain-name-servers",
+						"space": "dhcp4",
+						"data": "192.168.10.99"
+					},
+					{
+						"name": "domain-name",
+						"space": "dhcp4",
+						"data": "targaryen.lan"
+					}
+				]
+			}
+		]
+	}
 }
