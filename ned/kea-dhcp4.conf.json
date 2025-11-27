@@ -99,7 +99,7 @@
 				"id": 2,
 				"interface": "eth0",
 				"subnet": "192.168.11.0/24",
-				"pools": [{ "pool": "192.168.11.0-192.168.11.254" }],
+				"pools": [{ "pool": "192.168.11.1-192.168.11.254" }],
 				"ddns-qualifying-suffix": "lannister.lan",
 				"option-data": [
 					{
@@ -118,8 +118,8 @@
 			{
 				"id": 3,
 				"interface": "eth0",
-				"subnet": "192.168.57.0/24",
-				"pools": [{ "pool": "192.168.57.0-192.168.57.254" }],
+				"subnet": "192.168.12.0/24",
+				"pools": [{ "pool": "192.168.12.1-192.168.12.254" }],
 				"ddns-qualifying-suffix": "targaryen.lan",
 				"option-data": [
 					{

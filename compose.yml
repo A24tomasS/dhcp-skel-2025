@@ -11,7 +11,7 @@ services:
     volumes:
       - ./ned/kea-dhcp4.conf.json:/etc/kea/kea-dhcp4.conf
       - ./ned/dhcp-ddns.conf.json:/etc/kea/ddns-dhcp.conf
-      #- ./ned/keaCons:/var/lib/kea
+      - ./ned/keaCons:/var/lib/kea
       - ./ned/keaLogs:/var/log/kea
 #===================DHCP==========================
 #===================DNS==========================
@@ -60,8 +60,9 @@ services:
     command: >
       sh -c "sleep 5 && ip addr flush dev eth0 && dhclient -v eth0 && sleep infinity"
 
-  cliente2:
+  robb:
     build: ./cliente
+    hostname: robb
     networks:
       stark_lan:
         mac_address: 02:42:ac:11:00:11  # dirección HW fija
@@ -71,41 +72,47 @@ services:
       sh -c "sleep 5 && ip addr flush dev eth0 && dhclient -v eth0 && sleep infinity"
 #===================Stark.lan==========================
 #===================lannister.lan==========================
-  cliente3:
+  jamie:
     build: ./cliente
+    hostname: jamie
     networks:
-      stark_lan:
+      lannister_lan:
         mac_address: 02:42:ac:11:00:12  # dirección HW fija
     cap_add:
       - NET_ADMIN
     command: >
       sh -c "sleep 5 && ip addr flush dev eth0 && dhclient -v eth0 && sleep infinity"
 
-  cliente4:
+  alex:
     build: ./cliente
+    hostname: alex
     networks:
-      stark_lan:
-        mac_address: 02:42:ac:11:00:13  # dirección HW fija
+      lannister_lan:
+        mac_address: 02:42:ac:11:00:13 # dirección HW fija
     cap_add:
       - NET_ADMIN
     command: >
-      sh -c "sleep 5 && ip addr flush dev eth0 && dhclient -v eth0 && sleep infinity"
+      sh -c "sleep 5 && ip addr flush dev eth0 && dhclient -v eth0 && sleep infinity" 
+      
+# 
 #===================lannister.lan==========================
 #===================vboxnet1==========================
-  cliente5:
+  daenerys:
     build: ./cliente
+    hostname: daenerys
     networks:
-      stark_lan:
+      targaryen_lan:
         mac_address: 02:42:ac:11:00:14  # dirección HW fija
     cap_add:
       - NET_ADMIN
     command: >
       sh -c "sleep 5 && ip addr flush dev eth0 && dhclient -v eth0 && sleep infinity"
 
-  cliente6:
+  ranbo:
     build: ./cliente
+    hostname: ranbo
     networks:
-      stark_lan:
+      targaryen_lan:
         mac_address: 02:42:ac:11:00:15  # dirección HW fija
     cap_add:
       - NET_ADMIN

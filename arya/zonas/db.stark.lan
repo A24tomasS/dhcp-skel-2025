@@ -1,11 +1,37 @@
-$TTL 86400
-@       IN      SOA     arya.stark.lan. admin.stark.lan. (
-                        2025011801 ; Serial
-                        3600       ; Refresh
-                        1800       ; Retry
-                        604800     ; Expire
-                        86400 )    ; Minimum
-
-@       IN      NS      arya.stark.lan.
-
-arya    IN      A       192.168.10.99
+$TTL 86400	; 1 day
+stark.lan.		IN SOA	arya.stark.lan. admin.stark.lan. (
+				2025011809 ; serial
+				3600       ; refresh (1 hour)
+				1800       ; retry (30 minutes)
+				604800     ; expire (1 week)
+				86400      ; minimum (1 day)
+				)
+			NS	arya.stark.lan.
+$TTL 600	; 10 minutes
+4e2c3cfc107f.stark.lan.	A	192.168.10.32
+			DHCID	( AAABRWaDdLHwVZB1P15+t0wcaHrARw9vZjLCZCHUbjBW
+				f4Q= ) ; 0 1 32
+8f7eefe99f46.stark.lan.	A	192.168.10.30
+			DHCID	( AAABPQ7uMrTAvY0+00mh69OHR0mGb+zZQDtvKf/KTPY6
+				rYo= ) ; 0 1 32
+9794f76a391d.stark.lan.	A	192.168.10.30
+			DHCID	( AAAB5Gr6wodvkvH0M0AzO53ywkSvKViwwZ5gbFE8RApy
+				JGo= ) ; 0 1 32
+a8113f5e07a7.stark.lan.	A	192.168.10.101
+			DHCID	( AAAB4OO2C1Cd68kvHXEojKWqFTslyyc2cmJa1M5tcOf2
+				3oU= ) ; 0 1 32
+ad133a30f904.stark.lan.	A	192.168.10.103
+			DHCID	( AAABm2Mz4vpr5XBFB02NWt1Ordel7etUFzHHSAwIi0tE
+				sPA= ) ; 0 1 32
+$TTL 86400	; 1 day
+arya.stark.lan.		A	192.168.10.99
+$TTL 600	; 10 minutes
+b6d9b7533e49.stark.lan.	A	192.168.10.102
+			DHCID	( AAABYqKVwMACFbpTWH8o5Wk+Wzcp4jdh8XgGcL2rlcPX
+				ogo= ) ; 0 1 32
+bran.stark.lan.		A	192.168.10.31
+			DHCID	( AAAB2KBYg7cukD8sxFiwzXtlj5Il3015M77/cuLsUnPB
+				sIk= ) ; 0 1 32
+robb.stark.lan.		A	192.168.10.30
+			DHCID	( AAAB2VH5jtcriEIpZH5OSasNbepoTWz7J6pZAMxLtjWJ
+				gHw= ) ; 0 1 32

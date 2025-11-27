@@ -15,4 +15,4 @@ ip addr add 192.168.10.253/24 dev eth1
 ip addr add 192.168.10.252/24 dev eth1
 
 # Mantener el contenedor vivo
-dhcp-helper -s 192.168.10.10 -i eth2 -i eth3 -d
+dhcp-helper -s 192.168.10.100 -i eth3 -i eth2 -d
