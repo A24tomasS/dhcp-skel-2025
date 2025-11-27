@@ -44,7 +44,7 @@
 			{
 				"name": "domain-name-servers",
 				"space": "dhcp4",
-				"data": "192.168.10.99"
+				"data": "192.168.10.100"
 			}
 		],
 		"subnet4": [
@@ -108,11 +108,6 @@
 						"data": "192.168.11.254"
 					},
 					{
-						"name": "domain-name-servers",
-						"space": "dhcp4",
-						"data": "192.168.10.99"
-					},
-					{
 						"name": "domain-name",
 						"space": "dhcp4",
 						"data": "lennister.lan"
@@ -131,11 +126,6 @@
 						"name": "routers",
 						"space": "dhcp4",
 						"data": "192.168.12.254"
-					},
-					{
-						"name": "domain-name-servers",
-						"space": "dhcp4",
-						"data": "192.168.10.99"
 					},
 					{
 						"name": "domain-name",

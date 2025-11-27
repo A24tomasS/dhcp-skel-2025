@@ -6,25 +6,4 @@ $TTL 86400	; 1 day
 				604800     ; expire (1 week)
 				86400      ; minimum (1 day)
 				)
-			NS	arya.stark.lan.
-$TTL 600	; 10 minutes
-101.10.168.192.in-addr.arpa. PTR a8113f5e07a7.stark.lan.
-			DHCID	( AAAB4OO2C1Cd68kvHXEojKWqFTslyyc2cmJa1M5tcOf2
-				3oU= ) ; 0 1 32
-102.10.168.192.in-addr.arpa. PTR b6d9b7533e49.stark.lan.
-			DHCID	( AAABYqKVwMACFbpTWH8o5Wk+Wzcp4jdh8XgGcL2rlcPX
-				ogo= ) ; 0 1 32
-103.10.168.192.in-addr.arpa. PTR ad133a30f904.stark.lan.
-			DHCID	( AAABm2Mz4vpr5XBFB02NWt1Ordel7etUFzHHSAwIi0tE
-				sPA= ) ; 0 1 32
-30.10.168.192.in-addr.arpa. PTR	robb.stark.lan.
-			DHCID	( AAAB2VH5jtcriEIpZH5OSasNbepoTWz7J6pZAMxLtjWJ
-				gHw= ) ; 0 1 32
-31.10.168.192.in-addr.arpa. PTR	bran.stark.lan.
-			DHCID	( AAAB2KBYg7cukD8sxFiwzXtlj5Il3015M77/cuLsUnPB
-				sIk= ) ; 0 1 32
-32.10.168.192.in-addr.arpa. PTR	4e2c3cfc107f.stark.lan.
-			DHCID	( AAABRWaDdLHwVZB1P15+t0wcaHrARw9vZjLCZCHUbjBW
-				f4Q= ) ; 0 1 32
-$TTL 86400	; 1 day
-99.10.168.192.in-addr.arpa. PTR	arya.stark.lan.
+@        IN      NS      arya.targaryen.lan.

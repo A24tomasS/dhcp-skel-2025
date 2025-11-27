@@ -1,19 +1,9 @@
 $TTL 86400	; 1 day
 lannister.lan.		IN SOA	arya.lannister.lan. admin.lannister.lan. (
-				2025011803 ; serial
+				2025011804 ; serial
 				3600       ; refresh (1 hour)
 				1800       ; retry (30 minutes)
 				604800     ; expire (1 week)
 				86400      ; minimum (1 day)
 				)
-			NS	arya.lannister.lan.
-$TTL 600	; 10 minutes
-alex.lannister.lan.	A	192.168.11.1
-			DHCID	( AAABaTsKly99CHgI3shNw4G4ZmbvT9zg45Zz5W1WpVKe
-				RwI= ) ; 0 1 32
-$TTL 86400	; 1 day
-arya.lannister.lan.	A	192.168.10.99
-$TTL 600	; 10 minutes
-jamie.lannister.lan.	A	192.168.11.0
-			DHCID	( AAABPQHLqMlhJGFHtKZ1RjQFOg3f2MEMYXVb818QUt1G
-				wyA= ) ; 0 1 32
+@        IN      NS      arya.targaryen.lan.
