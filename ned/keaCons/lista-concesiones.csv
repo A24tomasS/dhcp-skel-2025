@@ -1,7 +1,0 @@
-address,hwaddr,client_id,valid_lifetime,expire,subnet_id,fqdn_fwd,fqdn_rev,hostname,state,user_context,pool_id
-192.168.12.1,02:42:ac:11:00:15,,600,1764243532,3,1,1,ranbo.targaryen.lan,0,,0
-192.168.10.30,02:42:ac:11:00:11,,600,1764243532,1,1,1,robb.stark.lan,0,,0
-192.168.11.1,02:42:ac:11:00:12,,600,1764243532,2,1,1,jamie.lannister.lan,0,,0
-192.168.12.2,02:42:ac:11:00:14,,600,1764243532,3,1,1,daenerys.targaryen.lan,0,,0
-192.168.10.31,02:42:ac:11:00:10,,600,1764243532,1,1,1,bran.stark.lan,0,,0
-192.168.11.2,02:42:ac:11:00:13,,600,1764243532,2,1,1,alex.lannister.lan,0,,0
