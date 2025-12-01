@@ -6,4 +6,4 @@ $TTL 86400
                         604800     ; Expire
                         86400 )    ; Minimum
 
-@        IN      NS      arya.targaryen.lan.
+@        IN      NS      arya.stark.lan.

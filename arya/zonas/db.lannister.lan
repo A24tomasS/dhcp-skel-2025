@@ -6,4 +6,4 @@ lannister.lan.		IN SOA	arya.lannister.lan. admin.lannister.lan. (
 				604800     ; expire (1 week)
 				86400      ; minimum (1 day)
 				)
-@        IN      NS      arya.targaryen.lan.
+@        IN      NS      arya.stark.lan.
